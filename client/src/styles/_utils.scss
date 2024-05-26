@@ -1,0 +1,27 @@
+.WMFA-prose {
+  max-width: 80ch;
+
+  &--longer {
+    max-width: 100ch;
+  }
+}
+
+.WMFA-help {
+  cursor: help;
+}
+
+.WMFA-register-status-block {
+  border-radius: 3px;
+  background-color: var(--w-color-warning-50);
+  margin: 1em 0;
+  padding: 1em;
+  display: none;
+
+  & p:last-child {
+    margin-bottom: 0;
+  }
+
+  &:has(.visible) {
+    display: block;
+  }
+}

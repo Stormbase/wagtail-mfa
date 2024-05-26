@@ -1,0 +1,45 @@
+{% extends "wagtail_mfa/base_admin.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}
+{% trans "Delete Passkey" %}
+{% endblock %}
+
+
+{% block content %}
+{% trans "Delete Passkey" as header_label %}
+{% include "wagtailadmin/shared/header.html" with title=header_label %}
+
+<div class="nice-padding">
+    <div class="WMFA-BlankBox">
+        {% icon name="passkey" classname="WMFA-BlankBox__icon" %}
+        {% trans "(unnamed device)" as unnamed_device_str %}
+        {% with device_name=object.name|default:unnamed_device_str %}
+            <h2 class="WMFA-BlankBox__title">{% blocktrans trimmed %}Delete passkey “{{ device_name }}”?{% endblocktrans %}</h2>
+            <p class="WMFA-prose WMFA-BlankBox__text">
+                {% blocktrans trimmed %}
+                Are you sure you want to delete this passkey?
+                When you remove this passkey, you will no longer be able to use it to sign in.
+                {% endblocktrans %}
+            </p>
+            <p class="WMFA-prose WMFA-BlankBox__text">
+                <i>
+                {% blocktrans trimmed %}
+                Note: you may still see this passkey as an option to sign in until you also remove it from your browser, device or password manager.
+                {% endblocktrans %}
+                </i>
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="button no">
+                    {% trans "Delete Passkey" %}
+                </button>
+            </form>
+        {% endwith %}
+
+        <a href="{% url "wagtail_mfa_registered_devices" %}">{% trans "Back to overview" %}</a>
+    <div>
+</div>
+{% endblock %}
+

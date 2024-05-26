@@ -1,0 +1,118 @@
+.WMFA {
+  &-BlankBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-3;
+    max-width: $box-max-width;
+    background: var(--wmfa-box-background-color);
+    border-style: solid;
+    border-color: var(--wmfa-box-border-color);
+    border-radius: $box-border-radius;
+    border-width: $box-border-width;
+    padding: $spacing-5;
+
+    &__title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--w-color-text-label);
+    }
+
+    &__text {
+      text-align: center;
+      max-width: 80ch;
+    }
+
+    &__icon {
+      color: var(--wmfa-passkey-icon-color);
+      height: 4rem;
+    }
+  }
+
+  &-Box {
+    max-width: $box-max-width;
+    background-color: var(--wmfa-box-background-color);
+    border-style: solid;
+    border-color: var(--wmfa-box-border-color);
+    border-radius: $box-border-radius;
+    border-width: $box-border-width;
+
+    &__header {
+      background-color: var(--wmfa-box-header-color);
+      border-style: solid;
+      border-color: var(--wmfa-box-border-color);
+      border-top-left-radius: $box-border-radius;
+      border-top-right-radius: $box-border-radius;
+      border-width: $box-border-width;
+      margin: calc($box-border-width * -1) calc($box-border-width * -1) 0;
+    }
+
+    &__header-inner {
+      padding: $spacing-3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--w-color-text-label);
+    }
+
+    &__rows {
+      padding: 0;
+      margin: 0;
+    }
+
+    &__row {
+      border-top: $box-border-width solid var(--wmfa-box-border-color);
+      padding: $spacing-3;
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: $breakpoint-md) {
+        flex-direction: row;
+      }
+
+      &:first-of-type {
+        border-top-color: transparent;
+      }
+    }
+
+    &__row-content {
+      flex: auto;
+
+      // These are already the defaults, but we're being explicit here to prevent
+      // future changes to the defaults from affecting this component.
+      & strong {
+        color: var(--w-color-text-label);
+        font-weight: 700;
+      }
+      & i {
+        color: var(--w-color-text-label);
+        font-style: italic;
+      }
+    }
+
+    &__row-badge {
+      display: inline-flex;
+      margin-inline-start: 0.5em;
+      padding: 0.1em 0.25em;
+      border: 1px solid var(--wmfa-box-badge-border-color);
+      border-radius: 0.375em;
+    }
+
+    &__row-actions {
+      display: inline-flex;
+      margin-top: $spacing-1;
+
+      @media (min-width: $breakpoint-md) {
+        margin-top: unset;
+      }
+    }
+  }
+}

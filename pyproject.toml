@@ -1,0 +1,107 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wagtail-mfa"
+dynamic = ["version"]
+readme = "README.md"
+description = "Secure your Wagtail site with multi-factor authentication. Supports TOTP and WebAuthn/Passkeys."
+requires-python = ">=3.9"
+license = "BSD-3-Clause"
+keywords = ["wagtail", "mfa", "2fa", "totp", "passkeys", "webauthn", "security"]
+authors = [
+  { name = "Storm B. Heg", email = "storm@stormbase.digital" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Web Environment",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: BSD License",
+  "Topic :: Security",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Wagtail",
+  "Framework :: Wagtail :: 5",
+  "Framework :: Wagtail :: 6",
+]
+dependencies = [
+  "wagtail>=5.2",
+  "django>=4.2",
+  "django-otp>=1.0,<2.0",
+  "django-otp-webauthn>=0.1.0,<1.0",
+  "precis-i18n>=1.1.0,<2.0",
+]
+
+[project.urls]
+# TODO: documentation link
+# Documentation = "https://github.com/Stormbase/wagtail-mfa/"
+Changelog = "https://github.com/Stormbase/wagtail-mfa/blob/main/CHANGELOG.md"
+Issues = "https://github.com/Stormbase/wagtail-mfa/issues"
+Source = "https://github.com/Stormbase/wagtail-mfa"
+
+[tool.hatch.version]
+path = "src/wagtail_mfa/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+artifacts = [
+  # Include built static files that are gitignored and thus not included by default
+  "src/wagtail_mfa/static/wagtail_mfa/*",
+  # Include compiled translations that are gitignored and thus not included by default
+  "src/wagtail_mfa/locale/*/LC_MESSAGES/*.mo",
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "django-debug-toolbar>4,<5",
+]
+
+[tool.hatch.envs.hatch-static-analysis]
+dependencies = [
+  # Update as necessary, prevent sudden breakage
+  "ruff>0.4,<0.5",
+  "isort>5,<6",
+]
+
+[tool.ruff]
+target-version = "py39"  # minimum target version
+
+[tool.ruff.lint]
+# E501: Line too long
+ignore = ["E501"]
+select = [
+    "E", # pycodestyle errors
+    "F", # pyflakes
+    "I", # isort
+    "T20", # flake8-print
+    "BLE", # flake8-blind-except
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+
+[tool.isort]
+force_grid_wrap = 0
+include_trailing_comma = true
+line_length = 88
+multi_line_output = 3
+use_parentheses = true
+
+[tool.coverage.run]
+source_pkgs = ["wagtail_mfa", "tests"]
+branch = true
+parallel = true
+omit = []
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]

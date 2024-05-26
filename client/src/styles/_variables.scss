@@ -1,0 +1,43 @@
+@import "tokens";
+// per https://docs.wagtail.org/en/stable/advanced_topics/customisation/admin_templates.html#custom-user-interface-colours
+
+// Light theme via Wagtail theme preferences
+:root,
+.w-theme-light {
+  --wmfa-box-header-color: #{$box-header-light};
+  --wmfa-box-background-color: #{$box-background-light};
+  --wmfa-box-border-color: #{$box-border-color-light};
+  --wmfa-box-badge-border-color: #{$box-badge-border-color-light};
+  --wmfa-passkey-icon-color: #353535;
+}
+
+// Light theme via system preferences
+@media (prefers-color-scheme: light) {
+  .w-theme-system {
+    --wmfa-box-header-color: #{$box-header-light};
+    --wmfa-box-background-color: #{$box-background-light};
+    --wmfa-box-border-color: #{$box-border-color-light};
+    --wmfa-box-badge-border-color: #{$box-badge-border-color-light};
+    --wmfa-passkey-icon-color: #353535;
+  }
+}
+
+// Dark theme via Wagtail theme preferences
+.w-theme-dark {
+  --wmfa-box-header-color: #{$box-header-dark};
+  --wmfa-box-background-color: #{$box-background-dark};
+  --wmfa-box-border-color: #{$box-border-color-dark};
+  --wmfa-box-badge-border-color: #{$box-badge-border-color-dark};
+  --wmfa-passkey-icon-color: #ffffff;
+}
+
+// Dark theme via system preferences
+@media (prefers-color-scheme: dark) {
+  .w-theme-system {
+    --wmfa-box-header-color: #{$box-header-dark};
+    --wmfa-box-background-color: #{$box-background-dark};
+    --wmfa-box-border-color: #{$box-border-color-dark};
+    --wmfa-box-badge-border-color: #{$box-badge-border-color-dark};
+    --wmfa-passkey-icon-color: #ffffff;
+  }
+}

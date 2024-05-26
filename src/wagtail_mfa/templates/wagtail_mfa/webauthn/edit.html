@@ -1,0 +1,28 @@
+{% extends "wagtail_mfa/base_admin.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}
+{% trans "Alter Passkey" %}
+{% endblock %}
+
+{% block content %}
+{% trans "Update passkey" as header_label %}
+{% include "wagtailadmin/shared/header.html" with title=header_label %}
+<div class="nice-padding">
+    <form method="POST" novalidate data-edit-form>
+        {% csrf_token %}
+        {% for field in form.hidden_fields %}{{ field }}{% endfor %}
+
+        <ul class="fields">
+            {% for field in form.visible_fields %}
+                <li>{% formattedfield field %}</li>
+            {% endfor %}
+        </ul>
+
+        {% block actions %}
+            <button type="submit" class="button">{% trans "Save changes" %}</button>
+        {% endblock %}
+    </form>
+</div>
+{% endblock %}
+

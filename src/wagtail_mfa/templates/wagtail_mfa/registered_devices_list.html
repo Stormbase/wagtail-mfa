@@ -1,0 +1,102 @@
+{% extends "wagtail_mfa/base_admin.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}
+{% trans "Registered MFA devices" %}
+{% endblock %}
+
+{% block content %}
+{% trans "Multi Factor Authentication Settings" as header_label %}
+{% trans "Manage your authentication settings" as description_label %}
+{% include "wagtailadmin/shared/header.html" with title=header_label description=description_label %}
+
+{% trans "(unnamed device)" as unlabeled_device_str %}
+<div class="nice-padding">
+    <div>
+        <div>
+            <h2>{% trans "Passkeys" %}</h2>
+            {% if webauthn_devices %}
+            <p class="WMFA-prose WMFA-prose--longer">
+                {% blocktrans trimmed %}
+                Passkeys allow you to verify your identity using touch, facial recognition, a device password, or a PIN. They can be used for sign-in as a simple and secure alternative to your password and two-factor credentials.
+                {% endblocktrans %}
+            </p>
+            {% endif %}
+        </div>
+        {% if webauthn_devices %}
+        <div class="WMFA-Box">
+            <div class="WMFA-Box__header">
+                <div class="WMFA-Box__header-inner">
+                    <h3 class="WMFA-Box__title">{% trans "Your passkeys" %}</h3>
+                    <a href="{% url "wagtail_mfa_webauthn_create" %}" class="button button-small bicolor button--icon">
+                        <span class="icon-wrapper">
+                            {% icon name="plus" %}
+                        </span>
+                        {% trans "Add Passkey" %}
+                    </a>
+                </div>
+            </div>
+            <ul class="WMFA-Box__rows">
+                {% for device in webauthn_devices %}
+                <li class="WMFA-Box__row">
+                    <div class="WMFA-Box__row-content">
+                        <div>
+                            {% if device.name %}
+                            <strong>
+                                {{ device.name }}
+                            </strong>
+                            {% else %}
+                            <i>
+                                {{ unlabeled_device_str }}
+                            </i>
+                            {% endif %}
+
+                            {% if device.backup_state %}
+                            <span tabindex="0" class="WMFA-help WMFA-Box__row-badge" data-controller="w-tooltip" data-w-tooltip-content-value="{% trans "This Passkey indicates it has been backed up" %}">
+                                {% translate "Synced" %}
+                            </span>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <span>
+                                {% blocktrans with created_at_date=device.created_at|date:"DATE_FORMAT" trimmed %}
+                                    Added on {{ created_at_date }}.
+                                {% endblocktrans %}
+                                {% if device.last_used_at %}
+                                    {# Translators: last_used_at_naturaltime is in natural language. Like 'last used 12 minutes ago' or 'last used two weeks ago' #}
+                                    {% blocktrans with last_used_at_naturaltime=device.last_used_at|timesince_simple trimmed %}
+                                        Last used: {{ last_used_at_naturaltime }}
+                                    {% endblocktrans %}
+                                {% else %}
+                                    {% trans "Last used: never" %}
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="WMFA-Box__row-actions">
+                        <span class="w-sr-only" id="webauthn-device-description-{{ forloop.counter }}">
+                            {% blocktrans with device_name=device.name|default:unlabeled_device_str trimmed %}Passkey {{ device_name }}{% endblocktrans %}
+                        </span>
+                        <a href="{% url "wagtail_mfa_webauthn_edit" pk=device.pk %}" aria-describedby="webauthn-device-description-{{ forloop.counter }}" class="button button-small">{% translate "Edit" context "verb, action" %}</a>
+                        <a href="{% url "wagtail_mfa_webauthn_delete" pk=device.pk %}" aria-describedby="webauthn-device-description-{{ forloop.counter }}" class="button button-small no">{% translate "Delete" context "verb, action" %}</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="WMFA-BlankBox">
+            <h3 class="WMFA-BlankBox__title">{% trans "Authenticate with Passkeys" %}</h3>
+            <p class="WMFA-prose">
+                {% blocktrans trimmed %}
+                Passkeys allow you to verify your identity using touch, facial recognition, a device password, or a PIN. They can be used for sign-in as a simple and secure alternative to your password and two-factor credentials.
+                {% endblocktrans %}
+            </p>
+            <div>
+                <a href="{% url "wagtail_mfa_webauthn_create" %}" class="button">{% trans "Start Passkey setup" %}</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "wagtailadmin/login.html" %}
+{% load static i18n wagtailadmin_tags otp_webauthn %}
+
+{% block below_login %}
+
+    <div>
+        <span id="passkey-verification-placeholder"></span>
+    </div>
+    <template id="passkey-verification-available-template">
+        <hr>
+        <div class="passkey-verification-holder">
+            <button
+                type="button"
+                id="passkey-verification-button"
+                >
+                {% translate "Sign in using a Passkey" %}
+            </button>
+            <p id="passkey-verification-status-message"></p>
+        </div>
+    </template>
+    <template id="passkey-verification-unavailable-template"></template>
+
+    {% render_otp_webauthn_auth_scripts username_field_selector="input[name='username']" %}
+    <link rel="stylesheet" href="{% static "wagtail_mfa/wagtailadmin_login.css" %}">
+{% endblock %}

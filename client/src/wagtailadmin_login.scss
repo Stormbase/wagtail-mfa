@@ -1,0 +1,27 @@
+// These styles only apply to the Wagtail admin login page
+.passkey-verification-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#passkey-verification-button {
+  appearance: none;
+  background: none;
+  color: var(--w-color-text-link-default);
+  padding: 1em;
+}
+
+#passkey-verification-button[disabled] {
+  cursor: not-allowed;
+  color: var(--w-color-text-link-disabled);
+}
+
+#passkey-verification-button:hover:not(:disabled) {
+  color: var(--w-color-text-link-hover);
+}
+
+#passkey-verification-status-message {
+  width: 100%;
+  text-align: center;
+}

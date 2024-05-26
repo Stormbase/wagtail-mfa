@@ -1,0 +1,67 @@
+{% extends "wagtail_mfa/base_admin.html" %}
+{% load i18n otp_webauthn wagtailadmin_tags %}
+
+{% block titletag %}
+{% trans "Registered MFA devices" %}
+{% endblock %}
+
+{% block content %}
+{% trans "Create new passkey" as header_label %}
+{% include "wagtailadmin/shared/header.html" with title=header_label %}
+<div class="nice-padding">
+    <template id="passkey-registration-available-template">
+        <div class="WMFA-BlankBox">
+            {% icon name="passkey" classname="WMFA-BlankBox__icon" %}
+            <h2 class="WMFA-BlankBox__title">{% trans "Sign in using Passkeys" %}</h2>
+            <p class="WMFA-prose WMFA-BlankBox__text">
+                {% blocktrans trimmed %}
+                Your device supports passkeys, a password replacement that validates your identity using touch, facial recognition, a device password, or a PIN.
+
+                Passkeys can be used for sign-in as a simple and secure alternative to your password and two-factor credentials.
+                {% endblocktrans %}
+            </p>
+            <button
+                class="button"
+                type="button"
+                id="passkey-register-button"
+            >
+                {% trans "Register Passkey" %}
+           </button>
+
+           <div class="WMFA-register-status-block help-block help-warning">
+               <p id="passkey-register-status-message"></p>
+           </div>
+
+
+           <a href="{% url "wagtail_mfa_registered_devices" %}">{% trans "Back to overview" %}</a>
+        <div>
+    </template>
+
+    <template id="passkey-registration-unavailable-template">
+        <div class="WMFA-BlankBox">
+            <h2 class="WMFA-BlankBox__title">{% trans "Sign in using Passkeys" %}</h2>
+            <p class="WMFA-prose">
+                {% blocktrans trimmed%}
+                Sorry, your browser does not have Passkey support. You cannot register a Passkey using this browser. Try using a different browser or device.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </template>
+
+    <span id="passkey-registration-placeholder"></span>
+
+    {% comment %}
+    We need to include a CSRF token here because this will cause Django to set a CSRF cookie, which is picked up by the
+    JavaScript code that sends the registration request.
+    {% endcomment %}
+    <form method="POST">
+        {% csrf_token %}
+
+        {# The JavaScript code will set this field and submit the form #}
+        <input type="hidden" name="device" value="">
+    </form>
+
+    {% render_otp_webauthn_register_scripts %}
+</div>
+{% endblock %}
+
