@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "wagtail_mfa",
     # Wagtail
     "wagtail.sites",
+    "wagtail.search",
     "wagtail.users",
     "wagtail.snippets",
     "wagtail.documents",
