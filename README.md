@@ -20,7 +20,7 @@ Under the hood, Wagtail MFA uses [django-otp](https://github.com/django-otp/djan
 Install the package using pip:
 
 ```console
-pip install wagtail-2fa
+pip install wagtail-mfa
 ```
 
 Add all required apps to your `INSTALLED_APPS`:
@@ -30,9 +30,14 @@ Add all required apps to your `INSTALLED_APPS`:
 
 INSTALLED_APPS = [
     ...
+    # Wagtail MFA must be installed before wagtail, because it overrides the default Wagtail login template
     "wagtail_mfa",
+    ...
+    # django-otp and django-otp-webauthn are required
     "django_otp",
     "django_otp_webauthn,
+    # Wagtail apps go after
+    "wagtail",
     ...
 ]
 ```
