@@ -125,3 +125,7 @@ This setting is similar to Django's [`CSRF_TRUSTED_ORIGINS`](https://docs.django
 ## Development
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for information on how to develop and contribute to this project.
+
+## License
+
+This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.
