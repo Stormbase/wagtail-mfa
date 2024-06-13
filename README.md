@@ -7,6 +7,33 @@ Under the hood, Wagtail MFA uses [django-otp](https://github.com/django-otp/djan
 > [!IMPORTANT]  
 > This package is alpha and not yet feature-complete. It hasn't been thoroughly tested and documented yet. If you are interested in using this package, please star this repository to show your interest. Eventually, I intend to
 
+## Screenshots
+
+<table>
+    <tbody>
+        <th>Safari autofill prompt for saved Passkey</th>
+        <th>Login with fingerprint</th>
+        <th>Registered Passkeys</th>
+        <tr>
+            <td>
+                <a href="https://github.com/Stormbase/wagtail-mfa/blob/main/docs/images/wagtail-login-autofill-prompt.png" target="_blank">
+                    <img src="https://github.com/Stormbase/wagtail-mfa/blob/main/docs/images/wagtail-login-autofill-prompt.png" alt="Wagtail login page showing a browser prompt to login to this site using saved Passkey">
+                </a>
+            </td>
+            <td>
+                <a href="https://github.com/Stormbase/wagtail-mfa/blob/main/docs/images/wagtail-login-touchid-prompt.png" target="_blank">
+                    <img src="https://github.com/Stormbase/wagtail-mfa/blob/main/docs/images/wagtail-login-touchid-prompt.png" alt="Wagtail login page showing a browser prompt asking for a fingerprint scan">
+                </a>
+            </td>
+            <td>
+                <a href="https://github.com/Stormbase/wagtail-mfa/blob/main/docs/images/wagtail-user-passkeys-listing.png" target="_blank">
+                    <img src="https://github.com/Stormbase/wagtail-mfa/blob/main/docs/images/wagtail-user-passkeys-listing.png" alt="Wagtail account settings page showing a list of registered Passkeys">
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 ## Features
 
 Supported authentication methods:
