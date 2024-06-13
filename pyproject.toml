@@ -14,7 +14,7 @@ authors = [
   { name = "Storm B. Heg", email = "storm@stormbase.digital" },
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 3 - Alpha",
   "Environment :: Web Environment",
   "Operating System :: OS Independent",
   "Intended Audience :: Developers",
