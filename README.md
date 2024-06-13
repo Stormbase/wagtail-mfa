@@ -121,3 +121,7 @@ This setting is similar to Django's [`CSRF_TRUSTED_ORIGINS`](https://docs.django
 
 - **Issues on Firefox**. When using Firefox to register and store a Passkey on an Android device, the Passkey will not be available to use for passwordless login. This is because Firefox does not create a `discoverable credential`. This appears to be a limitation of Firefox. This issue was observed on Firefox 126 on macOS 14.
 - **Multi-site has limited support.** WebAuthn does not currently support using Passkeys across different domains. If you create a Passkey for `your-site.com`, you cannot use it to authenticate on `another-site.com`. Subdomains like `subdomain.your-site.com` are supported however.
+
+## Development
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for information on how to develop and contribute to this project.
