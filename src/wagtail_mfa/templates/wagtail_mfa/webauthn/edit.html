@@ -1,5 +1,5 @@
 {% extends "wagtail_mfa/base_admin.html" %}
-{% load i18n wagtailadmin_tags %}
+{% load i18n wagtailadmin_tags wagtail_mfa_tags %}
 
 {% block titletag %}
 {% trans "Alter Passkey" %}
@@ -15,7 +15,7 @@
 
         <ul class="fields">
             {% for field in form.visible_fields %}
-                <li>{% formattedfield field %}</li>
+                <li>{% render_form_field field %}</li>
             {% endfor %}
         </ul>
 
