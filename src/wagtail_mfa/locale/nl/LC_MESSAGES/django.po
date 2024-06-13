@@ -117,8 +117,8 @@ msgid "Authenticate with Passkeys"
 msgstr "Authenticeer met Passkeys"
 
 #: src/wagtail_mfa/templates/wagtail_mfa/registered_devices_list.html:96
-msgid "Start Passkey setup"
-msgstr "Begin met Passkey-registratie"
+msgid "Get started with Passkeys"
+msgstr "Aan de slag met Passkeys"
 
 #: src/wagtail_mfa/templates/wagtail_mfa/webauthn/create.html:9
 msgid "Create new passkey"
