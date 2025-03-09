@@ -40,6 +40,21 @@ dependencies = [
   "precis-i18n>=1.1.0,<2.0",
 ]
 
+[project.optional-dependencies]
+testing =  [
+  "django-debug-toolbar>5,<6",
+  "dj-database-url>=2.1.0,<3",
+  # To test functionality with a strict Content Security Policy
+  "django-csp>=4.0b2,<5",
+  # Update as necessary, prevent sudden breakage
+  "pytest>8,<9",
+  "coverage[toml]>=7,<8",
+  "pytest-django>4.5,<5",
+  "pytest-factoryboy>=2,<3",
+  "pytest-env>=1,<2",
+  "pytest-randomly>=3.15,<4",
+]
+
 [project.urls]
 # TODO: documentation link
 # Documentation = "https://github.com/Stormbase/wagtail-mfa/"
@@ -60,15 +75,14 @@ artifacts = [
 
 [tool.hatch.envs.default]
 dependencies = [
-  "django-debug-toolbar>4,<5",
+  "wagtail-mfa[testing]",
 ]
 
+
 [tool.hatch.envs.hatch-static-analysis]
-dependencies = [
-  # Update as necessary, prevent sudden breakage
-  "ruff>0.4,<0.5",
-  "isort>5,<6",
-]
+# Do not use Hatch default configuration
+config-path = "pyproject.toml"
+dependencies = []
 
 [tool.ruff]
 target-version = "py39"  # minimum target version
@@ -86,12 +100,10 @@ select = [
     "UP", # pyupgrade
 ]
 
-[tool.isort]
-force_grid_wrap = 0
-include_trailing_comma = true
-line_length = 88
-multi_line_output = 3
-use_parentheses = true
+[tool.ruff.lint.isort]
+known-first-party = ["wagtail_mfa", "sandbox", "tests"]
+
+
 
 [tool.coverage.run]
 source_pkgs = ["wagtail_mfa", "tests"]
