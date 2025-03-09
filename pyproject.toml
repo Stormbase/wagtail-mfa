@@ -127,6 +127,13 @@ select = [
 known-first-party = ["wagtail_mfa", "sandbox", "tests"]
 
 
+[tool.pytest.ini_options]
+pythonpath = "sandbox"
+DJANGO_SETTINGS_MODULE = "settings"
+testpaths = "tests/"
+norecursedirs = ["tests/e2e"]
+addopts = "--reuse-db"
+
 
 [tool.coverage.run]
 source_pkgs = ["wagtail_mfa", "tests"]
