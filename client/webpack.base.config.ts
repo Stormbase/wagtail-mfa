@@ -32,7 +32,7 @@ const config: Configuration = {
     extensions: [".ts", ".js"],
   },
   output: {
-    path: path.resolve("../src/wagtail_mfa/static/wagtail_mfa"),
+    path: path.resolve("./src/wagtail_mfa/static/wagtail_mfa"),
   },
 };
 
