@@ -1,10 +1,16 @@
 # Wagtail MFA
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 Wagtail MFA is a multi-factor authentication package for Wagtail. It adds an extra layer of security to your Wagtail admin interface.
 
 Under the hood, Wagtail MFA uses [django-otp](https://github.com/django-otp/django-otp/) and [django-otp-webauthn](https://github.com/Stormbase/django-otp-webauthn) to provide the Passkey login functionality. All this package does is provide a Wagtail-specific UI to let users manage their MFA settings and a page for MFA verification.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > This package is alpha and not yet feature-complete. It hasn't been thoroughly tested and documented yet. If you are interested in using this package, please star this repository to show your interest. Eventually, I intend to
 
 ## Screenshots
