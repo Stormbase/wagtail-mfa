@@ -5,8 +5,8 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 const config: Configuration = {
   stats: "minimal",
   entry: {
-    wagtailadmin_login: "./src/wagtailadmin_login.ts",
-    wagtail_mfa: "./src/wagtail_mfa.ts",
+    wagtailadmin_login: "./client/src/wagtailadmin_login.ts",
+    wagtail_mfa: "./client/src/wagtail_mfa.ts",
   },
   plugins: [new MiniCssExtractPlugin()],
   module: {
