@@ -31,7 +31,9 @@ class RedirectURLMixin:
 
     def get_redirect_url(self):
         """Return the user-originating redirect URL if it's safe."""
-        redirect_to = self.request.POST.get(self.redirect_field_name, self.request.GET.get(self.redirect_field_name))
+        redirect_to = self.request.POST.get(
+            self.redirect_field_name, self.request.GET.get(self.redirect_field_name)
+        )
         url_is_safe = url_has_allowed_host_and_scheme(
             url=redirect_to,
             allowed_hosts=self.get_success_url_allowed_hosts(),
@@ -121,4 +123,6 @@ class DeleteWebAuthnDeviceView(LoginRequiredMixin, SuccessMessageMixin, DeleteVi
         return reverse("wagtail_mfa_registered_devices")
 
     def get_success_message(self, cleaned_data: dict[str, str]) -> str:
-        return _("Passkey “%(device_name)s“ deleted successfully") % {"device_name": self.object.name}
+        return _("Passkey “%(device_name)s“ deleted successfully") % {
+            "device_name": self.object.name
+        }

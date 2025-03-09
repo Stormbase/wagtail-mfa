@@ -8,7 +8,11 @@ from wagtail_mfa import views
 @hooks.register("register_admin_urls")
 def urlpatterns():
     return [
-        path("wagtail_mfa/devices/", views.RegisteredDevicesListView.as_view(), name="wagtail_mfa_registered_devices"),
+        path(
+            "wagtail_mfa/devices/",
+            views.RegisteredDevicesListView.as_view(),
+            name="wagtail_mfa_registered_devices",
+        ),
         path(
             "wagtail_mfa/devices/webauthn/create/",
             views.CreateWebAuthnDeviceView.as_view(),

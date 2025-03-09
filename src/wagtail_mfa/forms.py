@@ -10,7 +10,9 @@ WebAuthnCredential = get_credential_model()
 
 
 class WebAuthnCredentialForm(ModelForm):
-    device = forms.ModelChoiceField(queryset=WebAuthnCredential.objects.all(), widget=forms.HiddenInput())
+    device = forms.ModelChoiceField(
+        queryset=WebAuthnCredential.objects.all(), widget=forms.HiddenInput()
+    )
 
     class Meta:
         model = WebAuthnCredential
@@ -21,7 +23,9 @@ class WebAuthnCredentialRenameForm(ModelForm):
     name = forms.CharField(
         label=_("Nickname"),
         max_length=255,
-        help_text=_("Give this Passkey a memorable name. This will help you identify it later."),
+        help_text=_(
+            "Give this Passkey a memorable name. This will help you identify it later."
+        ),
     )
 
     class Meta:
