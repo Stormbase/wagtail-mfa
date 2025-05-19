@@ -97,6 +97,20 @@ OTP_WEBAUTHN_RP_NAME = WAGTAIL_SITE_NAME
 OTP_WEBAUTHN_ALLOWED_ORIGINS = ["https://your-domain.com", "https://subdomain.your-domain.com"]
 ```
 
+Add the URL patterns to your `urls.py`:
+
+```python
+# urls.py
+
+from django.urls import include, path
+
+urlpatterns = [
+    ...
+    path("webauthn/", include("django_otp_webauthn.urls", namespace="otp_webauthn")),
+    ...
+]
+```
+
 ## Configuration
 
 ### `OTP_WEBAUTHN_RP_ID`
