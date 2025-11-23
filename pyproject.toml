@@ -1,31 +1,20 @@
 [build-system]
-requires = ["hatchling"]
 build-backend = "hatchling.build"
+requires = [ "hatchling" ]
 
 [project]
 name = "wagtail-mfa"
-dynamic = ["version"]
-readme = "README.md"
 description = "Secure your Wagtail site with multi-factor authentication. Supports TOTP and WebAuthn/Passkeys."
-requires-python = ">=3.10"
+readme = "README.md"
+keywords = [ "2fa", "mfa", "passkeys", "security", "totp", "wagtail", "webauthn" ]
 license = "BSD-3-Clause"
-keywords = ["wagtail", "mfa", "2fa", "totp", "passkeys", "webauthn", "security"]
 authors = [
   { name = "Storm B. Heg", email = "storm@stormbase.digital" },
 ]
+requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Web Environment",
-  "Operating System :: OS Independent",
-  "Intended Audience :: Developers",
-  "License :: OSI Approved :: BSD License",
-  "Topic :: Security",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13",
-  "Programming Language :: Python :: 3.14",
   "Framework :: Django",
   "Framework :: Django :: 4.2",
   "Framework :: Django :: 5.0",
@@ -35,36 +24,44 @@ classifiers = [
   "Framework :: Wagtail",
   "Framework :: Wagtail :: 6",
   "Framework :: Wagtail :: 7",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Security",
 ]
+dynamic = [ "version" ]
 dependencies = [
-  "wagtail>=6.3",
   "django>=4.2",
-  "django-otp>=1.0,<2.0",
-  "django-otp-webauthn>=0.1.0,<1.0",
-  "precis-i18n>=1.1.0,<2.0",
+  "django-otp>=1,<2",
+  "django-otp-webauthn>=0.1,<1",
+  "precis-i18n>=1.1,<2",
+  "wagtail>=6.3",
 ]
 
-[project.optional-dependencies]
-testing =  [
-  "django-debug-toolbar>5,<6",
-  "dj-database-url>=2.1.0,<3",
+optional-dependencies.testing = [
+  "coverage[toml]>=7,<8",
+  "dj-database-url>=2.1,<3",
   # To test functionality with a strict Content Security Policy
   "django-csp>=4.0b2,<5",
+  "django-debug-toolbar>5,<6",
   # Update as necessary, prevent sudden breakage
   "pytest>8,<9",
-  "coverage[toml]>=7,<8",
   "pytest-django>4.5,<5",
-  "pytest-factoryboy>=2,<3",
   "pytest-env>=1,<2",
+  "pytest-factoryboy>=2,<3",
   "pytest-randomly>=3.15,<4",
 ]
-
-[project.urls]
 # TODO: documentation link
 # Documentation = "https://github.com/Stormbase/wagtail-mfa/"
-Changelog = "https://github.com/Stormbase/wagtail-mfa/blob/main/CHANGELOG.md"
-Issues = "https://github.com/Stormbase/wagtail-mfa/issues"
-Source = "https://github.com/Stormbase/wagtail-mfa"
+urls.Changelog = "https://github.com/Stormbase/wagtail-mfa/blob/main/CHANGELOG.md"
+urls.Issues = "https://github.com/Stormbase/wagtail-mfa/issues"
+urls.Source = "https://github.com/Stormbase/wagtail-mfa"
 
 [tool.hatch.version]
 path = "src/wagtail_mfa/__init__.py"
@@ -105,66 +102,59 @@ dependencies = [
   "wagtail-mfa[testing]",
 ]
 
-
 [tool.hatch.envs.hatch-static-analysis]
 # Do not use Hatch default configuration
 config-path = "pyproject.toml"
-dependencies = []
+dependencies = [  ]
 
 [tool.ruff]
-target-version = "py39"  # minimum target version
+target-version = "py39" # minimum target version
 
-[tool.ruff.lint]
-# E501: Line too long
-ignore = ["E501"]
-select = [
-    "E", # pycodestyle errors
-    "F", # pyflakes
-    "I", # isort
-    "T20", # flake8-print
-    "BLE", # flake8-blind-except
-    "C4", # flake8-comprehensions
-    "UP", # pyupgrade
+lint.select = [
+  "BLE", # flake8-blind-except
+  "C4",  # flake8-comprehensions
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "I",   # isort
+  "T20", # flake8-print
+  "UP",  # pyupgrade
 ]
-
-[tool.ruff.lint.isort]
-known-first-party = ["wagtail_mfa", "sandbox", "tests"]
-
+# E501: Line too long
+lint.ignore = [ "E501" ]
+lint.isort.known-first-party = [ "wagtail_mfa", "sandbox", "tests" ]
 
 [tool.pytest.ini_options]
 pythonpath = "sandbox"
 DJANGO_SETTINGS_MODULE = "settings"
 testpaths = "tests/"
-norecursedirs = ["tests/e2e"]
+norecursedirs = [ "tests/e2e" ]
 addopts = "--reuse-db"
 
-
 [tool.coverage.run]
-source_pkgs = ["wagtail_mfa",]
+source_pkgs = [ "wagtail_mfa" ]
 branch = true
-omit = ["*/migrations/*", "*/tests/*"]
-
+omit = [ "*/migrations/*", "*/tests/*" ]
 
 [tool.coverage.report]
 exclude_lines = [
-    # Have to re-enable the standard pragma
-    "pragma: no cover",
+  # Have to re-enable the standard pragma
+  "pragma: no cover",
 
-    # Don't complain about missing debug-only code:
-    "def __repr__",
-    "if self.debug",
+  # Don't complain about missing debug-only code:
+  "def __repr__",
+  "if self.debug",
 
-    # Don't complain if tests don't hit defensive assertion code:
-    "raise AssertionError",
-    "raise NotImplementedError",
+  # Don't complain if tests don't hit defensive assertion code:
+  "raise AssertionError",
+  "raise NotImplementedError",
 
-    # Don't complain if non-runnable code isn't run:
-    "if 0:",
-    "if __name__ == .__main__.:",
+  # Don't complain if non-runnable code isn't run:
+  "if 0:",
+  "if __name__ == .__main__.:",
 
-    # Don't complain about abstract methods, they aren't run:
-    "@(abc.)?abstractmethod",
+  # Don't complain about abstract methods, they aren't run:
+  "@(abc.)?abstractmethod",
 
-    # Nor complain about type checking
-    "if TYPE_CHECKING:",
+  # Nor complain about type checking
+  "if TYPE_CHECKING:",
 ]
