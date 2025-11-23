@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static "wagtail_mfa/wagtail_mfa.css" %}">
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "wagtail_mfa/wagtail_mfa.css" %}">
 {% endblock css %}
 
 {% block js %}
-{{ block.super }}
-<script async defer src="{% static "wagtail_mfa/wagtail_mfa.js" %}"></script>
+    {{ block.super }}
+    <script async defer src="{% static "wagtail_mfa/wagtail_mfa.js" %}"></script>
 {% endblock js %}
 
 {% block content %}
