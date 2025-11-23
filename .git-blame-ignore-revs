@@ -6,3 +6,5 @@
 
 # Reindent templates with djhtml
 0b0629193248caf3a1d282ff594fca62c64f1002
+# Reformat pyproject.toml with pyproject-fmt
+349be3bf694ab334c9491df5ce34a5e3d64892c6
