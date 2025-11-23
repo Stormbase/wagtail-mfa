@@ -65,7 +65,7 @@ Passkeys are still a relatively new technology, and not all browsers support the
 
 - Python >= 3.10
 - Django >= 4.2
-- Wagtail >= 5.2
+- Wagtail >= 6.3
 
 ## Installation
 

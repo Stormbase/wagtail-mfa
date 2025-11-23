@@ -33,12 +33,11 @@ classifiers = [
   "Framework :: Django :: 5.2",
   "Framework :: Django :: 6.0",
   "Framework :: Wagtail",
-  "Framework :: Wagtail :: 5",
   "Framework :: Wagtail :: 6",
   "Framework :: Wagtail :: 7",
 ]
 dependencies = [
-  "wagtail>=5.2",
+  "wagtail>=6.3",
   "django>=4.2",
   "django-otp>=1.0,<2.0",
   "django-otp-webauthn>=0.1.0,<1.0",
