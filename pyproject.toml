@@ -35,6 +35,7 @@ classifiers = [
   "Framework :: Wagtail",
   "Framework :: Wagtail :: 5",
   "Framework :: Wagtail :: 6",
+  "Framework :: Wagtail :: 7",
 ]
 dependencies = [
   "wagtail>=5.2",
