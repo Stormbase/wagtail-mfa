@@ -2,27 +2,46 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+        exclude: ^client/tsconfig.json$
       - id: check-merge-conflict
+      - id: check-ast
       - id: check-toml
       - id: check-yaml
+      - id: trailing-whitespace
       - id: debug-statements
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.9.10"
+    rev: "v0.14.6"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
   - repo: https://github.com/pycontribs/mirrors-prettier
-    rev: v3.5.3 # Keep in sync with package.json
+    rev: v3.6.2 # Keep in sync with package.json
     hooks:
       - id: prettier
         types_or:
           [css, javascript, ts, json, yaml, markdown, bash, editorconfig, toml]
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "v2.11.0"
+    hooks:
+      - id: pyproject-fmt
+        args: ["--max-supported-python=3.14"]
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: "1.29.1"
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "4.2"]
+  - repo: https://github.com/rtts/djhtml
+    rev: 3.0.10
+    hooks:
+      - id: djhtml
 
 ci:
   autoupdate_schedule: monthly
