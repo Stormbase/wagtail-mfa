@@ -36,6 +36,6 @@ class WebAuthnCredentialRenameForm(ModelForm):
         name = self.cleaned_data.get("name")
         try:
             name = nickname_profile.enforce(name)
-        except UnicodeEncodeError:
-            raise forms.ValidationError(_("Name contains invalid characters."))
+        except UnicodeEncodeError as e:
+            raise forms.ValidationError(_("Name contains invalid characters.")) from e
         return name
