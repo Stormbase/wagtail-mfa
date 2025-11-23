@@ -7,7 +7,7 @@ name = "wagtail-mfa"
 dynamic = ["version"]
 readme = "README.md"
 description = "Secure your Wagtail site with multi-factor authentication. Supports TOTP and WebAuthn/Passkeys."
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "BSD-3-Clause"
 keywords = ["wagtail", "mfa", "2fa", "totp", "passkeys", "webauthn", "security"]
 authors = [
@@ -21,7 +21,6 @@ classifiers = [
   "License :: OSI Approved :: BSD License",
   "Topic :: Security",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
