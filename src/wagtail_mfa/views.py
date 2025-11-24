@@ -5,10 +5,13 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.http import url_has_allowed_host_and_scheme
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.generic import DeleteView, FormView, TemplateView, UpdateView
 from django_otp_webauthn.utils import get_credential_model
+from wagtail.admin.views.generic import WagtailAdminTemplateMixin
+from wagtail.admin.views.account import AccountView as WagtailAccountView
+
 
 from wagtail_mfa.forms import WebAuthnCredentialForm, WebAuthnCredentialRenameForm
 
@@ -51,8 +54,16 @@ class RedirectURLMixin:
 
 
 @method_decorator(never_cache, name="dispatch")
-class RegisteredDevicesListView(LoginRequiredMixin, TemplateView):
+class RegisteredDevicesListView(LoginRequiredMixin, WagtailAdminTemplateMixin, TemplateView):
     template_name = "wagtail_mfa/registered_devices_list.html"
+    page_title = _("Registered MFA devices")
+    header_icon = "user"
+
+    def get_breadcrumbs_items(self):
+        return self.breadcrumbs_items + [
+            {"url": reverse("wagtailadmin_account"), "label": _("Account")},
+            {"url": reverse("wagtail_mfa_registered_devices"), "label": _("Multi-factor authentication")},
+        ]
 
     def get_webauthn_devices(self):
         user = self.request.user

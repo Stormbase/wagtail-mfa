@@ -1,5 +1,5 @@
-{% extends "wagtailadmin/base.html" %}
-{% load static %}
+{% extends "wagtailadmin/generic/base.html" %}
+{% load static wagtailadmin_tags %}
 
 {% block css %}
     {{ block.super }}
@@ -10,7 +10,3 @@
     {{ block.super }}
     <script async defer src="{% static "wagtail_mfa/wagtail_mfa.js" %}"></script>
 {% endblock js %}
-
-{% block content %}
-    {{ block.super }}
-{% endblock content %}
